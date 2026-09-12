@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X DKV 2 — SMKN 3 Pamekasan</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#070711;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(126,87,255,.18),transparent 30%),
+        radial-gradient(circle at 85% 70%,rgba(0,220,255,.12),transparent 30%);
+    pointer-events:none;
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:rgba(157,78,255,.12);
+    filter:blur(100px);
+    top:30%;
+    left:40%;
+    animation:floatBg 8s infinite alternate ease-in-out;
+    pointer-events:none;
+    z-index:-1;
+}
+
+@keyframes floatBg{
+    from{transform:translate(-100px,-50px)}
+    to{transform:translate(120px,80px)}
+}
+
+/* NAVBAR */
+nav{
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    width:92%;
+    max-width:1100px;
+    padding:13px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(15,15,30,.72);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    z-index:1000;
+    box-shadow:0 10px 40px rgba(0,0,0,.35);
+}
+
+.logo{
+    font-weight:800;
+    font-size:18px;
+    background:linear-gradient(90deg,#9d5cff,#00eaff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+nav ul{
+    display:flex;
+    gap:22px;
+    list-style:none;
+}
+
+nav a{
+    color:#aaa;
+    text-decoration:none;
+    font-size:13px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#fff;
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    padding:130px 7% 70px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:50px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 15px;
+    border-radius:50px;
+    background:rgba(157,92,255,.12);
+    border:1px solid rgba(157,92,255,.3);
+    color:#b98cff;
+    font-size:12px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(55px,9vw,110px);
+    line-height:.85;
+    font-weight:800;
+    letter-spacing:-5px;
+}
+
+.gradient{
+    background:linear-gradient(100deg,#a45cff,#00eaff,#ff55b8);
+    background-size:300%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:gradient 5s infinite alternate;
+}
+
+@keyframes gradient{
+    from{background-position:0}
+    to{background-position:100%}
+}
+
+.hero p{
+    color:#999;
+    max-width:550px;
+    margin-top:25px;
+    line-height:1.8;
+}
+
+.buttons{
+    display:flex;
+    gap:12px;
+    margin-top:30px;
+}
+
+.btn{
+    padding:13px 20px;
+    border-radius:14px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-main{
+    color:white;
+    background:linear-gradient(100deg,#814cff,#00bde8);
+    box-shadow:0 0 30px rgba(120,80,255,.25);
+}
+
+.btn-main:hover{
+    transform:translateY(-4px);
+}
+
+.btn-second{
+    color:#aaa;
+    border:1px solid #29293c;
+}
+
+.btn-second:hover{
+    color:#fff;
+    border-color:#555;
+}
+
+/* PAINTER */
+.paint-box{
+    height:430px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.canvas{
+    width:270px;
+    height:320px;
+    border-radius:15px;
+    border:8px solid #28283b;
+    background:
+        radial-gradient(circle at 30% 30%,#ff5bd7,transparent 20%),
+        radial-gradient(circle at 70% 65%,#00eaff,transparent 25%),
+        linear-gradient(135deg,#161629,#0e0e1b);
+    box-shadow:0 25px 70px rgba(0,0,0,.5);
+    position:relative;
+    overflow:hidden;
+    animation:canvasFloat 4s infinite ease-in-out;
+}
+
+.canvas::after{
+    content:"DKV";
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+    font-weight:800;
+    color:rgba(255,255,255,.8);
+    letter-spacing:4px;
+    transform:rotate(-8deg);
+}
+
+@keyframes canvasFloat{
+    0%,100%{transform:translateY(0) rotate(-2deg)}
+    50%{transform:translateY(-15px) rotate(2deg)}
+}
+
+.person{
+    position:absolute;
+    bottom:25px;
+    left:25%;
+    width:150px;
+    height:220px;
+    z-index:3;
+}
+
+.head{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#d89b78;
+    position:absolute;
+    left:45px;
+    top:0;
+}
+
+.hair{
+    width:58px;
+    height:32px;
+    border-radius:40px 40px 10px 10px;
+    background:#191522;
+    position:absolute;
+    left:43px;
+    top:-5px;
+}
+
+.body{
+    position:absolute;
+    left:28px;
+    top:52px;
+    width:90px;
+    height:135px;
+    border-radius:35px 35px 15px 15px;
+    background:linear-gradient(140deg,#814cff,#4b2a8f);
+}
+
+.arm{
+    position:absolute;
+    width:25px;
+    height:105px;
+    background:#d89b78;
+    border-radius:20px;
+    left:100px;
+    top:65px;
+    transform-origin:top center;
+    transform:rotate(-45deg);
+    animation:paintArm 2.2s infinite ease-in-out;
+    z-index:5;
+}
+
+.hand{
+    position:absolute;
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    background:#d89b78;
+    bottom:-10px;
+}
+
+.brush{
+    position:absolute;
+    width:9px;
+    height:105px;
+    background:#d0a36b;
+    bottom:-95px;
+    left:8px;
+    transform:rotate(-12deg);
+    border-radius:5px;
+}
+
+.brush::before{
+    content:"";
+    position:absolute;
+    top:-12px;
+    left:-4px;
+    width:17px;
+    height:25px;
+    background:#00eaff;
+    border-radius:5px 5px 12px 12px;
+}
+
+@keyframes paintArm{
+    0%,100%{transform:rotate(-45deg)}
+    50%{transform:rotate(-70deg)}
+}
+
+.paint{
+    position:absolute;
+    width:12px;
+    height:12px;
+    background:#ff4fc3;
+    border-radius:50%;
+    animation:drop 2s infinite;
+}
+
+.paint:nth-child(2){
+    left:65%;
+    top:35%;
+    animation-delay:.4s;
+}
+
+.paint:nth-child(3){
+    left:25%;
+    top:45%;
+    background:#00eaff;
+    animation-delay:1s;
+}
+
+@keyframes drop{
+    0%{transform:translateY(-10px) scale(.5);opacity:0}
+    40%{opacity:1}
+    100%{transform:translateY(80px) scale(1);opacity:0}
+}
+
+/* SECTION */
+section{
+    padding:100px 7%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title small{
+    color:#a56aff;
+    font-size:12px;
+}
+
+.section-title h2{
+    font-size:42px;
+    margin-top:8px;
+}
+
+/* PROFILE */
+.profile{
+    max-width:950px;
+    margin:auto;
+    padding:35px;
+    border:1px solid #242438;
+    background:rgba(20,20,35,.55);
+    border-radius:25px;
+    backdrop-filter:blur(15px);
+}
+
+.profile-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.info{
+    padding:22px;
+    border-radius:17px;
+    background:#111122;
+    border:1px solid #25253a;
+}
+
+.info span{
+    display:block;
+    color:#777;
+    font-size:11px;
+    margin-bottom:5px;
+}
+
+.info b{
+    font-size:15px;
+}
+
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    max-width:900px;
+    margin:40px auto 0;
+}
+
+.stat{
+    text-align:center;
+    padding:30px;
+    background:linear-gradient(145deg,#131326,#0e0e1b);
+    border:1px solid #24243a;
+    border-radius:20px;
+}
+
+.stat strong{
+    font-size:38px;
+    display:block;
+    background:linear-gradient(90deg,#a45cff,#00eaff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.stat span{
+    color:#777;
+    font-size:12px;
+}
+
+/* SCHEDULE */
+.schedule-wrap{
+    max-width:1100px;
+    margin:auto;
+}
+
+.days{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+
+.day-btn{
+    padding:11px 20px;
+    border-radius:12px;
+    border:1px solid #29293d;
+    background:#101020;
+    color:#888;
+    cursor:pointer;
+    transition:.3s;
+    font-family:inherit;
+}
+
+.day-btn:hover,
+.day-btn.active{
+    color:#fff;
+    background:linear-gradient(100deg,#794bff,#008fae);
+    border-color:transparent;
+}
+
+.schedule{
+    display:none;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.schedule.active{
+    display:grid;
+    animation:showSchedule .5s ease;
+}
+
+@keyframes showSchedule{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.subject{
+    padding:22px;
+    background:rgba(20,20,35,.7);
+    border:1px solid #29293e;
+    border-radius:18px;
+    position:relative;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.subject:hover{
+    transform:translateY(-6px);
+    border-color:#7652ff;
+    box-shadow:0 15px 40px rgba(80,50,200,.15);
+}
+
+.subject::before{
+    content:"";
+    position:absolute;
+    width:80px;
+    height:80px;
+    background:#8455ff;
+    filter:blur(45px);
+    opacity:.15;
+    right:-20px;
+    top:-20px;
+}
+
+.time{
+    color:#00dfff;
+    font-size:12px;
+    margin-bottom:10px;
+}
+
+.subject h3{
+    font-size:16px;
+}
+
+.subject p{
+    color:#777;
+    font-size:11px;
+    margin-top:5px;
+}
+
+/* STUDENTS */
+.students{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+    gap:12px;
+}
+
+.student{
+    padding:18px;
+    border-radius:16px;
+    background:#111122;
+    border:1px solid #242438;
+    text-align:center;
+    transition:.3s;
+}
+
+.student:hover{
+    transform:translateY(-5px);
+    border-color:#885cff;
+}
+
+.student .number{
+    color:#795cff;
+    font-size:11px;
+}
+
+.student b{
+    display:block;
+    margin-top:4px;
+    font-size:13px;
+}
+
+.student small{
+    color:#777;
+}
+
+/* PENGURUS */
+.management{
+    max-width:850px;
+    margin:0 auto 50px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.card{
+    padding:25px;
+    text-align:center;
+    background:#111122;
+    border:1px solid #25253b;
+    border-radius:20px;
+}
+
+.card .icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.card h3{
+    font-size:15px;
+}
+
+.card p{
+    color:#777;
+    font-size:12px;
+    margin-top:4px;
+}
+
+/* GALLERY */
+.gallery{
+    max-width:1050px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:170px;
+    gap:12px;
+}
+
+.gallery-item{
+    border-radius:18px;
+    background:
+        linear-gradient(135deg,rgba(140,80,255,.25),rgba(0,220,255,.12)),
+        #121223;
+    border:1px solid #29293d;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:35px;
+    transition:.4s;
+    overflow:hidden;
+}
+
+.gallery-item:hover{
+    transform:scale(1.03);
+}
+
+.gallery-item.big{
+    grid-column:span 2;
+    grid-row:span 2;
+}
+
+/* QUOTE */
+.quote{
+    max-width:850px;
+    margin:auto;
+    text-align:center;
+    padding:60px 25px;
+}
+
+.quote h2{
+    font-size:clamp(25px,4vw,45px);
+    line-height:1.3;
+}
+
+.quote span{
+    display:block;
+    color:#777;
+    margin-top:20px;
+}
+
+/* FOOTER */
+footer{
+    padding:40px 7%;
+    border-top:1px solid #202033;
+    text-align:center;
+    color:#666;
+    font-size:11px;
+}
+
+/* REVEAL */
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:1s;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:none;
+}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+
+    nav ul{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+        padding-top:130px;
+    }
+
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .buttons{
+        justify-content:center;
+    }
+
+    .paint-box{
+        height:350px;
+        transform:scale(.85);
+    }
+
+    .profile-grid,
+    .stats,
+    .management{
+        grid-template-columns:1fr;
+    }
+
+    .gallery{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .gallery-item.big{
+        grid-column:span 2;
+    }
+
+    section{
+        padding:80px 5%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">X DKV 2</div>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#profil">Profil</a></li>
+        <li><a href="#jadwal">Jadwal</a></li>
+        <li><a href="#siswa">Siswa</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="hero-text reveal">
+
+        <div class="badge">SMK NEGERI 3 PAMEKASAN</div>
+
+        <h1>
+            X<br>
+            <span class="gradient">DKV 2</span>
+        </h1>
+
+        <p>
+            Tempat berkumpulnya 29 siswa dengan kreativitas,
+            desain, cerita, dan kekompakan yang nggak ada habisnya.
+        </p>
+
+        <div class="buttons">
+            <a class="btn btn-main" href="#jadwal">Lihat Jadwal →</a>
+            <a class="btn btn-second" href="#siswa">Lihat Siswa</a>
+        </div>
+
+    </div>
+
+    <!-- ANIMATED PAINTER -->
+    <div class="paint-box reveal">
+
+        <div class="canvas"></div>
+
+        <div class="person">
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="body"></div>
+
+            <div class="arm">
+                <div class="hand"></div>
+                <div class="brush"></div>
+            </div>
+        </div>
+
+        <div class="paint"></div>
+        <div class="paint"></div>
+        <div class="paint"></div>
+
+    </div>
+
+</section>
+
+<!-- PROFIL -->
+<section id="profil">
+
+    <div class="section-title reveal">
+        <small>ABOUT OUR CLASS</small>
+        <h2>Profil Kelas</h2>
+    </div>
+
+    <div class="profile reveal">
+
+        <div class="profile-grid">
+
+            <div class="info">
+                <span>Kelas</span>
+                <b>X DKV 2</b>
+            </div>
+
+            <div class="info">
+                <span>Sekolah</span>
+                <b>SMK Negeri 3 Pamekasan</b>
+            </div>
+
+            <div class="info">
+                <span>Wali Kelas</span>
+                <b>Ria</b>
+            </div>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong>29</strong>
+                <span>Total Siswa</span>
+            </div>
+
+            <div class="stat">
+                <strong>X</strong>
+                <span>Tingkat Kelas</span>
+            </div>
+
+            <div class="stat">
+                <strong>DKV</strong>
+                <span>Jurusan</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- JADWAL -->
+<section id="jadwal">
+
+    <div class="section-title reveal">
+        <small>CLASS SCHEDULE</small>
+        <h2>Jadwal Pelajaran</h2>
+    </div>
+
+    <div class="schedule-wrap reveal">
+
+        <div class="days">
+
+            <button class="day-btn active" onclick="showDay('senin',this)">
+                SENIN
+            </button>
+
+            <button class="day-btn" onclick="showDay('selasa',this)">
+                SELASA
+            </button>
+
+            <button class="day-btn" onclick="showDay('rabu',this)">
+                RABU
+            </button>
+
+            <button class="day-btn" onclick="showDay('kamis',this)">
+                KAMIS
+            </button>
+
+            <button class="day-btn" onclick="showDay('jumat',this)">
+                JUMAT
+            </button>
+
+        </div>
+
+        <!-- SENIN -->
+        <div class="schedule active" id="senin">
+
+            <div class="subject">
+                <div class="time">07:00 — 08:30</div>
+                <h3>Dasar-Dasar DKV</h3>
+                <p>Materi kejuruan</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">08:30 — 10:00</div>
+                <h3>Bahasa Indonesia</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">10:15 — 11:45</div>
+                <h3>Matematika</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">12:30 — 14:00</div>
+                <h3>Informatika</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+        </div>
+
+        <!-- SELASA -->
+        <div class="schedule" id="selasa">
+
+            <div class="subject">
+                <div class="time">07:00 — 08:30</div>
+                <h3>Pendidikan Pancasila</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">08:30 — 10:00</div>
+                <h3>Bahasa Inggris</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">10:15 — 11:45</div>
+                <h3>Dasar-Dasar DKV</h3>
+                <p>Materi kejuruan</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">12:30 — 14:00</div>
+                <h3>IPAS</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+        </div>
+
+        <!-- RABU -->
+        <div class="schedule" id="rabu">
+
+            <div class="subject">
+                <div class="time">07:00 — 08:30</div>
+                <h3>Seni & Kreativitas</h3>
+                <p>Mata Pelajaran</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">08:30 — 10:00</div>
+                <h3>Dasar-Dasar DKV</h3>
+                <p>Materi kejuruan</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">10:15 — 11:45</div>
+                <h3>Pendidikan Agama</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">12:30 — 14:00</div>
+                <h3>Bahasa Indonesia</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+        </div>
+
+        <!-- KAMIS -->
+        <div class="schedule" id="kamis">
+
+            <div class="subject">
+                <div class="time">07:00 — 08:30</div>
+                <h3>Matematika</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">08:30 — 10:00</div>
+                <h3>Informatika</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">10:15 — 11:45</div>
+                <h3>Bahasa Inggris</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">12:30 — 14:00</div>
+                <h3>Dasar-Dasar DKV</h3>
+                <p>Materi kejuruan</p>
+            </div>
+
+        </div>
+
+        <!-- JUMAT -->
+        <div class="schedule" id="jumat">
+
+            <div class="subject">
+                <div class="time">07:00 — 08:30</div>
+                <h3>PJOK</h3>
+                <p>Pendidikan Jasmani</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">08:30 — 10:00</div>
+                <h3>IPAS</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+            <div class="subject">
+                <div class="time">10:15 — 11:45</div>
+                <h3>Pendidikan Pancasila</h3>
+                <p>Mata Pelajaran Umum</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PENGURUS -->
+<section>
+
+    <div class="section-title reveal">
+        <small>CLASS MANAGEMENT</small>
+        <h2>Pengurus Kelas</h2>
+    </div>
+
+    <div class="management reveal">
+
+        <div class="card">
+            <div class="icon">👑</div>
+            <h3>Raihan</h3>
+            <p>Ketua Kelas</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Radit</h3>
+            <p>Wakil Ketua</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📋</div>
+            <h3>Jehan</h3>
+            <p>Sekretaris 1</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">💰</div>
+            <h3>Feby</h3>
+            <p>Bendahara 1</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">💰</div>
+            <h3>Nora</h3>
+            <p>Bendahara 2</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SISWA -->
+<section id="siswa">
+
+    <div class="section-title reveal">
+        <small>OUR PEOPLE</small>
+        <h2>29 Siswa X DKV 2</h2>
+    </div>
+
+    <div class="students reveal">
+
+        <div class="student"><span class="number">01</span><b>Raihan</b><small>Ketua</small></div>
+        <div class="student"><span class="number">02</span><b>Radit</b><small>Wakil</small></div>
+        <div class="student"><span class="number">03</span><b>Feby</b><small>Bendahara</small></div>
+        <div class="student"><span class="number">04</span><b>Billy</b></div>
+        <div class="student"><span class="number">05</span><b>Farhan</b></div>
+        <div class="student"><span class="number">06</span><b>Zafier</b></div>
+        <div class="student"><span class="number">07</span><b>Paisal</b></div>
+        <div class="student"><span class="number">08</span><b>Jehan</b><small>Sekretaris</small></div>
+        <div class="student"><span class="number">09</span><b>Nora</b><small>Bendahara</small></div>
+        <div class="student"><span class="number">10</span><b>Febri</b></div>
+        <div class="student"><span class="number">11</span><b>Aldo</b></div>
+
+        <div class="student"><span class="number">12</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">13</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">14</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">15</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">16</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">17</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">18</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">19</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">20</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">21</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">22</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">23</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">24</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">25</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">26</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">27</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">28</span><b>Nama Siswa</b></div>
+        <div class="student"><span class="number">29</span><b>Nama Siswa</b></div>
+
+    </div>
+
+</section>
+
+<!-- GALERI -->
+<section id="galeri">
+
+    <div class="section-title reveal">
+        <small>CLASS MOMENTS</small>
+        <h2>Galeri Kelas</h2>
+    </div>
+
+    <div class="gallery reveal">
+
+        <div class="gallery-item big">🎨</div>
+        <div class="gallery-item">📸</div>
+        <div class="gallery-item">🖌️</div>
+        <div class="gallery-item">💻</div>
+        <div class="gallery-item">🔥</div>
+        <div class="gallery-item">✨</div>
+
+    </div>
+
+</section>
+
+<!-- QUOTE -->
+<section>
+
+    <div class="quote reveal">
+
+        <h2>
+            “Bukan cuma satu kelas,
+            tapi satu cerita yang bakal diingat.”
+        </h2>
+
+        <span>— X DKV 2</span>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 X DKV 2 — SMK Negeri 3 Pamekasan
+    <br>
+    Dibuat dengan 🎨 & ❤️ oleh X DKV 2
+</footer>
+
+<script>
+
+/* DAY SWITCHER */
+function showDay(day,button){
+
+    document.querySelectorAll('.schedule')
+        .forEach(el => el.classList.remove('active'));
+
+    document.getElementById(day)
+        .classList.add('active');
+
+    document.querySelectorAll('.day-btn')
+        .forEach(btn => btn.classList.remove('active'));
+
+    button.classList.add('active');
+}
+
+
+/* SCROLL REVEAL */
+const reveals = document.querySelectorAll('.reveal');
+
+function reveal(){
+
+    reveals.forEach(el => {
+
+        const top = el.getBoundingClientRect().top;
+
+        if(top < window.innerHeight - 80){
+            el.classList.add('show');
+        }
+
+    });
+
+}
+
+window.addEventListener('scroll',reveal);
+reveal();
+
+
+/* CURSOR GLOW */
+const glow = document.createElement('div');
+
+glow.style.position='fixed';
+glow.style.width='150px';
+glow.style.height='150px';
+glow.style.borderRadius='50%';
+glow.style.background='rgba(120,80,255,.08)';
+glow.style.filter='blur(30px)';
+glow.style.pointerEvents='none';
+glow.style.zIndex='-1';
+glow.style.transform='translate(-50%,-50%)';
+
+document.body.appendChild(glow);
+
+document.addEventListener('mousemove',e=>{
+    glow.style.left=e.clientX+'px';
+    glow.style.top=e.clientY+'px';
+});
+
+</script>
+
+</body>
+</html>
